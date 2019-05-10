@@ -95,7 +95,7 @@ $json_data = "";
 $json_err2 = "";
 $json_data2 = "";
 if(isset($_GET['productid'])){
-	$url = "http://open.api.ebay.com/shopping?callname=GetSingleItem&responseencoding=JSON&appid=BhanuAro-WebTech-PRD-116e557a4-e7b7ee98&siteid=0&version=967&ItemID=".$_GET['productid']."&IncludeSelector=Description,Details,ItemSpecifics";
+	$url = "http://open.api.ebay.com/shopping?callname=GetSingleItem&responseencoding=JSON&appid=[Your App ID]&siteid=0&version=967&ItemID=".$_GET['productid']."&IncludeSelector=Description,Details,ItemSpecifics";
 	$json = json_decode(file_get_contents($url),true);
     
     if($json['Ack']=='Failure'){
@@ -104,7 +104,7 @@ if(isset($_GET['productid'])){
     else{
     	$json_data = json_encode($json['Item']);
     }
-	$url = "http://svcs.ebay.com/MerchandisingService?OPERATION-NAME=getSimilarItems&SERVICE-NAME=MerchandisingService&SERVICE-VERSION=1.1.0&CONSUMER-ID=BhanuAro-WebTech-PRD-116e557a4-e7b7ee98&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&itemId=".$_GET['productid']."&maxResults=8";
+	$url = "http://svcs.ebay.com/MerchandisingService?OPERATION-NAME=getSimilarItems&SERVICE-NAME=MerchandisingService&SERVICE-VERSION=1.1.0&CONSUMER-ID=[Your App ID]&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&itemId=".$_GET['productid']."&maxResults=8";
 	$json = json_decode(file_get_contents($url),true);
 	if($json['getSimilarItemsResponse']['ack']=='Failure'){
 		$json_err2 = "<table style='width:100%;border-width: 2px; border-style: solid; border-color: #dcdcdc;margin:8px;font-size:20px;'><tr><td style='text-align:center;'><b>No Similar Item found.</b></td></table>";
@@ -120,7 +120,7 @@ if(isset($_GET['productid'])){
     }
 }
 elseif(isset($_GET["submit"])){
-	$url="http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=BhanuAro-WebTech-PRD-116e557a4-e7b7ee98&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&paginationInput.entriesPerPage=20";
+	$url="http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsAdvanced&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=[Your App ID]&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&paginationInput.entriesPerPage=20";
 	$keyword = $_GET["keyword"];
 	$url.='&keywords='.rawurlencode($keyword);
 	$cat=$_GET['category'];
